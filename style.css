@@ -1,0 +1,2278 @@
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+}
+
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+
+    overflow: hidden;
+
+    background: #090d13;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    color: white;
+}
+
+
+button,
+input {
+    font: inherit;
+}
+
+
+button {
+    border: 0;
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   SCREENS
+========================================================= */
+
+.screen {
+    display: none;
+
+    position: fixed;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100dvh;
+
+    overflow: hidden;
+}
+
+
+.screen.active {
+    display: flex;
+}
+
+
+/* =========================================================
+   SETUP SCREEN
+========================================================= */
+
+#setupScreen {
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: flex-start;
+
+    width: 100%;
+    height: 100dvh;
+    min-height: 100dvh;
+    max-height: 100dvh;
+
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    -webkit-overflow-scrolling: touch;
+
+    overscroll-behavior-y: contain;
+
+    padding:
+        max(22px, env(safe-area-inset-top))
+        16px
+        max(70px, env(safe-area-inset-bottom));
+
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(80, 229, 141, .16),
+            transparent 35%
+        ),
+        linear-gradient(
+            180deg,
+            #111722,
+            #090d13
+        );
+}
+
+
+#setupScreen::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
+
+#setupScreen {
+    scrollbar-width: none;
+}
+
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.game-logo {
+    flex: 0 0 auto;
+
+    text-align: center;
+
+    margin-bottom: 12px;
+}
+
+
+.logo-goat {
+    font-size: 52px;
+
+    line-height: 1;
+
+    filter:
+        drop-shadow(0 8px 14px rgba(0, 0, 0, .35));
+}
+
+
+.game-logo h1 {
+    margin: 8px 0 0;
+
+    font-size: clamp(32px, 8vw, 52px);
+
+    font-weight: 1000;
+
+    letter-spacing: 2px;
+
+    line-height: 1;
+
+    background:
+        linear-gradient(
+            180deg,
+            #ffffff,
+            #73ef9c
+        );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    color: transparent;
+}
+
+
+.game-logo p {
+    margin: 7px 0 0;
+
+    color: #8f9aaa;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    letter-spacing: 5px;
+}
+
+
+/* =========================================================
+   LEVEL
+========================================================= */
+
+.level-box {
+    flex: 0 0 auto;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 9px;
+
+    margin-bottom: 14px;
+
+    padding: 9px 18px;
+
+    border:
+        1px solid
+        rgba(80, 229, 141, .3);
+
+    border-radius: 999px;
+
+    background:
+        rgba(255,255,255,.04);
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,.2);
+}
+
+
+.level-box span {
+    color: #8993a3;
+
+    font-size: 11px;
+
+    font-weight: 900;
+
+    letter-spacing: 1px;
+}
+
+
+.level-box strong {
+    color: #50e58d;
+
+    font-size: 18px;
+}
+
+
+/* =========================================================
+   SETUP CARD
+========================================================= */
+
+.setup-card {
+    flex: 0 0 auto;
+
+    width: min(100%, 520px);
+
+    padding: 16px;
+
+    margin-bottom: 14px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.08);
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(25,31,42,.98),
+            rgba(15,20,28,.98)
+        );
+
+    box-shadow:
+        0 15px 45px rgba(0,0,0,.3);
+}
+
+
+.card-title {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin-bottom: 13px;
+
+    font-size: 14px;
+
+    font-weight: 1000;
+
+    letter-spacing: .7px;
+}
+
+
+/* =========================================================
+   UPLOAD
+========================================================= */
+
+.upload-button {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 9px;
+
+    width: 100%;
+
+    min-height: 52px;
+
+    padding: 12px;
+
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #50e58d,
+            #35bd70
+        );
+
+    color: #07120c;
+
+    font-weight: 1000;
+
+    box-shadow:
+        0 8px 20px
+        rgba(80,229,141,.18);
+}
+
+
+.upload-button:active {
+    transform: scale(.98);
+}
+
+
+/* =========================================================
+   CROP
+========================================================= */
+
+.crop-section {
+    display: none;
+
+    margin-top: 15px;
+}
+
+
+.crop-section.visible {
+    display: block;
+}
+
+
+.crop-title {
+    margin-bottom: 10px;
+
+    text-align: center;
+
+    color: #9da6b5;
+
+    font-size: 12px;
+
+    font-weight: 800;
+}
+
+
+.crop-area {
+    position: relative;
+
+    width: min(100%, 310px);
+
+    aspect-ratio: 1;
+
+    margin: auto;
+
+    overflow: hidden;
+
+    border-radius: 50%;
+
+    background: #080b10;
+
+    border:
+        3px solid
+        rgba(80,229,141,.8);
+
+    box-shadow:
+        0 0 0 6px rgba(80,229,141,.08),
+        0 15px 35px rgba(0,0,0,.4);
+
+    touch-action: none;
+}
+
+
+#cropImage {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    max-width: none;
+
+    transform-origin: center center;
+
+    pointer-events: none;
+}
+
+
+.crop-circle {
+    position: absolute;
+
+    inset: 0;
+
+    border-radius: 50%;
+
+    pointer-events: none;
+
+    box-shadow:
+        inset 0 0 0 999px rgba(0,0,0,.1);
+}
+
+
+.zoom-row {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin: 13px 0;
+}
+
+
+.zoom-row span {
+    color: #7e8898;
+
+    font-weight: 900;
+}
+
+
+#zoomSlider {
+    flex: 1;
+
+    accent-color: #50e58d;
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.secondary-button {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+
+    min-height: 46px;
+
+    padding: 10px 14px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.1);
+
+    border-radius: 12px;
+
+    background:
+        rgba(255,255,255,.05);
+
+    color: white;
+
+    font-size: 13px;
+
+    font-weight: 900;
+}
+
+
+.secondary-button:active {
+    transform: scale(.98);
+}
+
+
+/* =========================================================
+   WEAPONS
+========================================================= */
+
+.weapon-list {
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, minmax(0, 1fr));
+
+    gap: 7px;
+}
+
+
+.weapon-card {
+    min-width: 0;
+
+    padding: 9px 4px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.08);
+
+    border-radius: 13px;
+
+    background:
+        rgba(255,255,255,.035);
+
+    color: white;
+
+    transition:
+        .15s ease;
+}
+
+
+.weapon-card.selected {
+    border-color: #50e58d;
+
+    background:
+        rgba(80,229,141,.13);
+
+    box-shadow:
+        0 0 0 2px
+        rgba(80,229,141,.08);
+}
+
+
+.weapon-card:active {
+    transform: scale(.95);
+}
+
+
+.weapon-icon {
+    font-size: 28px;
+
+    line-height: 1;
+
+    margin-bottom: 6px;
+}
+
+
+.weapon-card strong {
+    display: block;
+
+    overflow: hidden;
+
+    white-space: nowrap;
+
+    text-overflow: ellipsis;
+
+    font-size: 9px;
+}
+
+
+.weapon-card small {
+    display: block;
+
+    margin-top: 4px;
+
+    color: #778293;
+
+    font-size: 7px;
+}
+
+
+/* =========================================================
+   START BUTTON
+========================================================= */
+
+.start-button {
+    flex: 0 0 auto;
+
+    width: min(100%, 520px);
+
+    min-height: 60px;
+
+    margin: 4px 0 25px;
+
+    border-radius: 17px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #62ef9b,
+            #32bb6d
+        );
+
+    color: #06120a;
+
+    font-size: 17px;
+
+    font-weight: 1000;
+
+    letter-spacing: .5px;
+
+    box-shadow:
+        0 12px 30px
+        rgba(80,229,141,.2);
+}
+
+
+.start-button:active {
+    transform: scale(.98);
+}
+
+
+/* =========================================================
+   GAME SCREEN
+========================================================= */
+
+#gameScreen {
+    flex-direction: column;
+
+    background: #0a1017;
+}
+
+
+/* =========================================================
+   HUD
+========================================================= */
+
+.game-hud {
+    position: relative;
+    z-index: 20;
+
+    display: grid;
+
+    grid-template-columns:
+        1fr
+        auto
+        1fr;
+
+    align-items: center;
+
+    gap: 10px;
+
+    width: 100%;
+
+    padding:
+        max(10px, env(safe-area-inset-top))
+        12px
+        8px;
+
+    background:
+        rgba(7,10,15,.8);
+
+    backdrop-filter: blur(10px);
+}
+
+
+.fighter-info {
+    min-width: 0;
+}
+
+
+.fighter-name {
+    margin-bottom: 5px;
+
+    font-size: 10px;
+
+    font-weight: 1000;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+
+.enemy-info {
+    text-align: right;
+}
+
+
+.hp-container {
+    height: 11px;
+
+    overflow: hidden;
+
+    border-radius: 999px;
+
+    background: #252b35;
+
+    border:
+        1px solid
+        rgba(255,255,255,.1);
+}
+
+
+.hp-bar {
+    height: 100%;
+
+    width: 100%;
+
+    border-radius: inherit;
+
+    transition:
+        width .25s ease;
+}
+
+
+.player-hp {
+    background:
+        linear-gradient(
+            90deg,
+            #39c875,
+            #69f0a1
+        );
+}
+
+
+.enemy-hp {
+    background:
+        linear-gradient(
+            90deg,
+            #ff4c5c,
+            #ff8b75
+        );
+}
+
+
+.fighter-info > div:last-child {
+    margin-top: 3px;
+
+    color: #8d97a6;
+
+    font-size: 8px;
+
+    font-weight: 800;
+}
+
+
+.battle-level {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: #858f9f;
+
+    font-size: 8px;
+
+    font-weight: 900;
+}
+
+
+.battle-level strong {
+    color: #50e58d;
+
+    font-size: 21px;
+
+    line-height: 1.1;
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.battle-status {
+    position: absolute;
+
+    z-index: 30;
+
+    left: 50%;
+
+    top: 74px;
+
+    transform: translateX(-50%);
+
+    padding: 7px 14px;
+
+    border-radius: 999px;
+
+    background:
+        rgba(0,0,0,.45);
+
+    color: white;
+
+    font-size: 11px;
+
+    font-weight: 1000;
+
+    pointer-events: none;
+
+    opacity: .9;
+}
+
+
+/* =========================================================
+   ARENA
+========================================================= */
+
+.arena {
+    position: relative;
+
+    flex: 1;
+
+    min-height: 0;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            180deg,
+            #70d8ff 0%,
+            #b9efff 48%,
+            #d9f8ff 100%
+        );
+
+    transform-origin: center;
+}
+
+
+.arena.shake {
+    animation: arenaShake .14s linear;
+}
+
+
+@keyframes arenaShake {
+
+    0% {
+        transform: translate(0);
+    }
+
+    25% {
+        transform: translate(5px,-2px);
+    }
+
+    50% {
+        transform: translate(-5px,2px);
+    }
+
+    75% {
+        transform: translate(3px,1px);
+    }
+
+    100% {
+        transform: translate(0);
+    }
+
+}
+
+
+/* =========================================================
+   CLOUDS
+========================================================= */
+
+.cloud {
+    position: absolute;
+
+    width: 100px;
+    height: 28px;
+
+    border-radius: 999px;
+
+    background:
+        rgba(255,255,255,.7);
+
+    filter:
+        blur(1px);
+
+    opacity: .7;
+}
+
+
+.cloud::before,
+.cloud::after {
+    content: "";
+
+    position: absolute;
+
+    border-radius: 50%;
+
+    background: inherit;
+}
+
+
+.cloud::before {
+    width: 45px;
+    height: 45px;
+
+    left: 18px;
+    bottom: 5px;
+}
+
+
+.cloud::after {
+    width: 55px;
+    height: 55px;
+
+    right: 10px;
+    bottom: 3px;
+}
+
+
+.cloud-1 {
+    top: 13%;
+
+    left: 8%;
+
+    animation: cloudMove 18s linear infinite;
+}
+
+
+.cloud-2 {
+    top: 25%;
+
+    right: 8%;
+
+    transform: scale(.7);
+
+    animation: cloudMove 24s linear infinite reverse;
+}
+
+
+.cloud-3 {
+    top: 8%;
+
+    left: 50%;
+
+    transform: scale(.45);
+
+    opacity: .4;
+}
+
+
+@keyframes cloudMove {
+
+    from {
+        margin-left: -20px;
+    }
+
+    to {
+        margin-left: 30px;
+    }
+
+}
+
+
+/* =========================================================
+   MOUNTAINS
+========================================================= */
+
+.mountains {
+    position: absolute;
+
+    left: 0;
+    right: 0;
+
+    bottom: 17%;
+
+    height: 35%;
+
+    clip-path:
+        polygon(
+            0 100%,
+            15% 55%,
+            25% 75%,
+            38% 30%,
+            50% 72%,
+            65% 42%,
+            76% 76%,
+            88% 35%,
+            100% 70%,
+            100% 100%
+        );
+}
+
+
+.mountain-back {
+    background: #82b9c5;
+
+    opacity: .55;
+}
+
+
+.mountain-front {
+    bottom: 12%;
+
+    background: #5b929d;
+
+    opacity: .75;
+}
+
+
+/* =========================================================
+   GROUND
+========================================================= */
+
+.arena::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    height: 18%;
+
+    background:
+        linear-gradient(
+            180deg,
+            #6bcf63,
+            #318f48
+        );
+
+    border-top:
+        4px solid
+        rgba(39,105,48,.55);
+}
+
+
+/* =========================================================
+   FIGHTERS
+========================================================= */
+
+.fighter {
+    position: absolute;
+
+    z-index: 10;
+
+    bottom: 17%;
+
+    width: 125px;
+    height: 180px;
+
+    transition:
+        filter .1s ease;
+}
+
+
+.player {
+    left: 14%;
+}
+
+
+.enemy {
+    left: 70%;
+}
+
+
+.fighter.hit {
+    animation: fighterHit .16s ease;
+}
+
+
+.fighter.stunned {
+    filter:
+        brightness(.8)
+        saturate(.6);
+}
+
+
+@keyframes fighterHit {
+
+    0% {
+        transform: translateX(0);
+    }
+
+    40% {
+        transform: translateX(-7px) rotate(-3deg);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+
+}
+
+
+/* =========================================================
+   GOAT
+========================================================= */
+
+.goat-character {
+    position: absolute;
+
+    left: 50%;
+    bottom: 0;
+
+    width: 100px;
+    height: 165px;
+
+    transform:
+        translateX(-50%);
+
+    animation:
+        goatIdle .8s ease-in-out infinite alternate;
+}
+
+
+@keyframes goatIdle {
+
+    from {
+        transform:
+            translateX(-50%)
+            translateY(0);
+    }
+
+    to {
+        transform:
+            translateX(-50%)
+            translateY(-2px);
+    }
+
+}
+
+
+/* horns */
+
+.goat-horns {
+    position: absolute;
+
+    left: 50%;
+
+    top: 0;
+
+    width: 70px;
+    height: 45px;
+
+    transform:
+        translateX(-50%);
+}
+
+
+.horn {
+    position: absolute;
+
+    width: 27px;
+    height: 38px;
+
+    border:
+        7px solid
+        #d7b579;
+
+    border-top-color: transparent;
+
+    border-radius:
+        50% 50% 50% 50%;
+}
+
+
+.left-horn {
+    left: 1px;
+
+    transform:
+        rotate(-32deg);
+}
+
+
+.right-horn {
+    right: 1px;
+
+    transform:
+        rotate(32deg);
+}
+
+
+/* head */
+
+.goat-head {
+    position: absolute;
+
+    left: 50%;
+    top: 20px;
+
+    width: 76px;
+    height: 68px;
+
+    transform:
+        translateX(-50%);
+
+    border-radius:
+        45% 45% 42% 42%;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fff,
+            #dce1e5
+        );
+
+    border:
+        3px solid
+        #aeb6bd;
+
+    box-shadow:
+        0 7px 10px
+        rgba(0,0,0,.18);
+}
+
+
+.goat-ear {
+    position: absolute;
+
+    top: 15px;
+
+    width: 26px;
+    height: 18px;
+
+    border-radius: 50%;
+
+    background: #d5dbe0;
+
+    border: 3px solid #aeb6bd;
+}
+
+
+.left-ear {
+    left: -19px;
+
+    transform: rotate(-20deg);
+}
+
+
+.right-ear {
+    right: -19px;
+
+    transform: rotate(20deg);
+}
+
+
+.goat-eye {
+    position: absolute;
+
+    top: 25px;
+
+    width: 9px;
+    height: 12px;
+
+    border-radius: 50%;
+
+    background: #15191e;
+}
+
+
+.left-eye {
+    left: 20px;
+}
+
+
+.right-eye {
+    right: 20px;
+}
+
+
+.goat-nose {
+    position: absolute;
+
+    left: 50%;
+    bottom: 11px;
+
+    width: 27px;
+    height: 17px;
+
+    transform:
+        translateX(-50%);
+
+    border-radius: 50%;
+
+    background:
+        #8c98a0;
+}
+
+
+.goat-beard {
+    position: absolute;
+
+    left: 50%;
+    bottom: -18px;
+
+    width: 25px;
+    height: 25px;
+
+    transform:
+        translateX(-50%);
+
+    background: #e9edf0;
+
+    clip-path:
+        polygon(
+            50% 100%,
+            0 0,
+            100% 0
+        );
+}
+
+
+/* neck */
+
+.goat-neck {
+    position: absolute;
+
+    left: 50%;
+    top: 82px;
+
+    width: 28px;
+    height: 28px;
+
+    transform:
+        translateX(-50%);
+
+    background: #d9dfe3;
+}
+
+
+/* body */
+
+.goat-body {
+    position: absolute;
+
+    left: 50%;
+    top: 98px;
+
+    width: 72px;
+    height: 58px;
+
+    transform:
+        translateX(-50%);
+
+    border-radius:
+        45% 45% 25% 25%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f7f9fa,
+            #c9d0d5
+        );
+
+    border:
+        3px solid
+        #aeb6bd;
+}
+
+
+.goat-arm {
+    position: absolute;
+
+    top: 8px;
+
+    width: 18px;
+    height: 52px;
+
+    border-radius: 999px;
+
+    background: #d6dce0;
+
+    border: 3px solid #aeb6bd;
+
+    transform-origin: top center;
+}
+
+
+.left-arm {
+    left: -14px;
+
+    transform: rotate(18deg);
+}
+
+
+.right-arm {
+    right: -14px;
+
+    transform: rotate(-18deg);
+}
+
+
+/* legs */
+
+.goat-legs {
+    position: absolute;
+
+    left: 50%;
+    top: 145px;
+
+    width: 54px;
+
+    transform:
+        translateX(-50%);
+}
+
+
+.goat-leg {
+    position: absolute;
+
+    width: 18px;
+    height: 38px;
+
+    border-radius: 999px;
+
+    background: #bfc7cc;
+
+    border: 3px solid #969fa6;
+}
+
+
+.left-leg {
+    left: 2px;
+}
+
+
+.right-leg {
+    right: 2px;
+}
+
+
+/* =========================================================
+   ENEMY
+========================================================= */
+
+.enemy-character {
+    position: absolute;
+
+    left: 50%;
+    bottom: 0;
+
+    width: 100px;
+    height: 165px;
+
+    transform:
+        translateX(-50%);
+
+    animation:
+        enemyIdle .85s ease-in-out infinite alternate;
+}
+
+
+@keyframes enemyIdle {
+
+    from {
+        transform:
+            translateX(-50%)
+            translateY(0);
+    }
+
+    to {
+        transform:
+            translateX(-50%)
+            translateY(-2px);
+    }
+
+}
+
+
+.enemy-head {
+    position: absolute;
+
+    left: 50%;
+    top: 12px;
+
+    width: 84px;
+    height: 78px;
+
+    transform:
+        translateX(-50%);
+
+    overflow: hidden;
+
+    border-radius: 46%;
+
+    background: #333;
+
+    border:
+        4px solid
+        #252a31;
+
+    box-shadow:
+        0 7px 15px
+        rgba(0,0,0,.3);
+}
+
+
+.enemy-face-placeholder {
+    position: absolute;
+
+    inset: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #444,
+            #20242b
+        );
+
+    color: #9aa3ad;
+
+    font-size: 30px;
+
+    font-weight: 1000;
+}
+
+
+.enemy-face {
+    position: absolute;
+
+    inset: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+}
+
+
+.enemy-face img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+
+.enemy-neck {
+    position: absolute;
+
+    left: 50%;
+    top: 84px;
+
+    width: 30px;
+    height: 30px;
+
+    transform:
+        translateX(-50%);
+
+    background: #4c535c;
+}
+
+
+.enemy-body {
+    position: absolute;
+
+    left: 50%;
+    top: 103px;
+
+    width: 72px;
+    height: 55px;
+
+    transform:
+        translateX(-50%);
+
+    border-radius:
+        30px 30px 20px 20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #525b66,
+            #252b33
+        );
+
+    border:
+        3px solid
+        #20252c;
+}
+
+
+.enemy-arm {
+    position: absolute;
+
+    top: 7px;
+
+    width: 19px;
+    height: 53px;
+
+    border-radius: 999px;
+
+    background: #434b55;
+
+    border: 3px solid #252b33;
+
+    transform-origin: top center;
+}
+
+
+.left-enemy-arm {
+    left: -15px;
+
+    transform: rotate(18deg);
+}
+
+
+.right-enemy-arm {
+    right: -15px;
+
+    transform: rotate(-18deg);
+}
+
+
+.enemy-legs {
+    position: absolute;
+
+    left: 50%;
+    top: 146px;
+
+    width: 54px;
+
+    transform:
+        translateX(-50%);
+}
+
+
+.enemy-leg {
+    position: absolute;
+
+    width: 18px;
+    height: 38px;
+
+    border-radius: 999px;
+
+    background: #303741;
+
+    border: 3px solid #20252b;
+}
+
+
+.left-enemy-leg {
+    left: 2px;
+}
+
+
+.right-enemy-leg {
+    right: 2px;
+}
+
+
+/* =========================================================
+   WEAPON
+========================================================= */
+
+.player-weapon {
+    position: absolute;
+
+    z-index: 4;
+
+    left: 75px;
+    top: 100px;
+
+    width: 50px;
+    height: 18px;
+
+    transform:
+        rotate(-25deg);
+
+    transform-origin: left center;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 28px;
+
+    pointer-events: none;
+
+    filter:
+        drop-shadow(
+            0 4px 4px
+            rgba(0,0,0,.3)
+        );
+}
+
+
+.player.attacking .player-weapon {
+    animation:
+        weaponAttack .28s ease-out;
+}
+
+
+.player.attacking .right-arm {
+    animation:
+        punchArm .28s ease-out;
+}
+
+
+@keyframes weaponAttack {
+
+    0% {
+        transform:
+            rotate(-25deg)
+            translate(0,0)
+            scale(1);
+    }
+
+    45% {
+        transform:
+            rotate(-5deg)
+            translate(18px,-14px)
+            scale(1.15);
+    }
+
+    100% {
+        transform:
+            rotate(30deg)
+            translate(5px,2px)
+            scale(1);
+    }
+
+}
+
+
+@keyframes punchArm {
+
+    0% {
+        transform: rotate(-18deg);
+    }
+
+    45% {
+        transform: rotate(-65deg);
+    }
+
+    100% {
+        transform: rotate(-18deg);
+    }
+
+}
+
+
+/* =========================================================
+   EFFECTS
+========================================================= */
+
+.hit-effect {
+    position: absolute;
+
+    z-index: 50;
+
+    left: 50%;
+    top: 45%;
+
+    transform:
+        translate(-50%,-50%)
+        scale(.2);
+
+    opacity: 0;
+
+    color: #fff;
+
+    font-size: 60px;
+
+    pointer-events: none;
+
+    text-shadow:
+        0 0 20px
+        rgba(255,255,255,.8);
+}
+
+
+.hit-effect.show {
+    animation:
+        hitEffect .32s ease-out;
+}
+
+
+@keyframes hitEffect {
+
+    0% {
+        opacity: 0;
+
+        transform:
+            translate(-50%,-50%)
+            scale(.2)
+            rotate(-20deg);
+    }
+
+    30% {
+        opacity: 1;
+
+        transform:
+            translate(-50%,-50%)
+            scale(1.15)
+            rotate(10deg);
+    }
+
+    100% {
+        opacity: 0;
+
+        transform:
+            translate(-50%,-50%)
+            scale(1.5)
+            rotate(20deg);
+    }
+
+}
+
+
+.damage-number {
+    position: absolute;
+
+    z-index: 60;
+
+    left: 50%;
+    top: 42%;
+
+    opacity: 0;
+
+    color: #ffef65;
+
+    font-size: 30px;
+
+    font-weight: 1000;
+
+    text-shadow:
+        2px 3px 0 #000;
+
+    pointer-events: none;
+}
+
+
+.damage-number.show {
+    animation:
+        damageFloat .7s ease-out;
+}
+
+
+@keyframes damageFloat {
+
+    0% {
+        opacity: 1;
+
+        transform:
+            translate(-50%,0)
+            scale(.7);
+    }
+
+    100% {
+        opacity: 0;
+
+        transform:
+            translate(-50%,-60px)
+            scale(1.2);
+    }
+
+}
+
+
+/* =========================================================
+   CONTROLS
+========================================================= */
+
+.controls {
+    position: relative;
+
+    z-index: 100;
+
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: space-between;
+
+    width: 100%;
+
+    padding:
+        9px
+        12px
+        max(12px, env(safe-area-inset-bottom));
+
+    background:
+        rgba(6,10,15,.9);
+
+    backdrop-filter: blur(12px);
+}
+
+
+.movement-controls,
+.action-controls {
+    display: flex;
+
+    gap: 9px;
+}
+
+
+.control-button {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 58px;
+    height: 58px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.13);
+
+    border-radius: 17px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #232b36,
+            #141a22
+        );
+
+    color: white;
+
+    font-size: 22px;
+
+    font-weight: 1000;
+
+    box-shadow:
+        0 7px 14px
+        rgba(0,0,0,.3);
+}
+
+
+.control-button:active,
+.control-button.pressed {
+    transform: translateY(2px) scale(.95);
+
+    background: #303b48;
+}
+
+
+.jump-button {
+    border-color:
+        rgba(100,180,255,.3);
+}
+
+
+.attack-button {
+    width: 74px;
+    height: 74px;
+
+    margin-bottom: 0;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #ff7d7d,
+            #df3047
+        );
+
+    border:
+        3px solid
+        rgba(255,255,255,.2);
+
+    font-size: 30px;
+
+    box-shadow:
+        0 9px 22px
+        rgba(220,40,65,.3);
+}
+
+
+/* =========================================================
+   RESULT
+========================================================= */
+
+#resultScreen {
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+
+    background:
+        radial-gradient(
+            circle at 50% 30%,
+            rgba(80,229,141,.14),
+            transparent 40%
+        ),
+        #090d13;
+}
+
+
+.result-card {
+    width: min(100%, 420px);
+
+    padding: 30px 22px;
+
+    text-align: center;
+
+    border:
+        1px solid
+        rgba(255,255,255,.1);
+
+    border-radius: 25px;
+
+    background:
+        rgba(22,28,38,.97);
+
+    box-shadow:
+        0 25px 70px
+        rgba(0,0,0,.45);
+}
+
+
+.result-icon {
+    font-size: 70px;
+
+    margin-bottom: 12px;
+}
+
+
+.result-card h2 {
+    margin: 0 0 10px;
+
+    font-size: 30px;
+
+    font-weight: 1000;
+}
+
+
+.result-card p {
+    margin: 0 0 22px;
+
+    color: #98a1af;
+
+    line-height: 1.5;
+}
+
+
+.result-card .secondary-button {
+    margin-top: 10px;
+}
+
+
+/* =========================================================
+   WALK / JUMP / DAMAGE
+========================================================= */
+
+.player.walking .goat-character {
+    animation:
+        goatWalk .25s ease-in-out infinite alternate;
+}
+
+
+@keyframes goatWalk {
+
+    from {
+        transform:
+            translateX(-50%)
+            translateY(0)
+            rotate(-1deg);
+    }
+
+    to {
+        transform:
+            translateX(-50%)
+            translateY(-4px)
+            rotate(1deg);
+    }
+
+}
+
+
+.player.jumping .goat-character {
+    animation: none;
+
+    transform:
+        translateX(-50%)
+        translateY(-28px);
+}
+
+
+.enemy.attacking .enemy-arm {
+    animation:
+        enemyPunch .3s ease-out;
+}
+
+
+@keyframes enemyPunch {
+
+    0% {
+        transform: rotate(18deg);
+    }
+
+    45% {
+        transform: rotate(65deg);
+    }
+
+    100% {
+        transform: rotate(18deg);
+    }
+
+}
+
+
+.damage-flash {
+    animation:
+        damageFlash .18s ease;
+}
+
+
+@keyframes damageFlash {
+
+    0%,
+    100% {
+        filter: brightness(1);
+    }
+
+    50% {
+        filter: brightness(2);
+    }
+
+}
+
+
+/* =========================================================
+   PORTRAIT MOBILE
+========================================================= */
+
+@media (max-width: 699px) {
+
+    #setupScreen {
+        justify-content: flex-start;
+
+        overflow-y: scroll;
+    }
+
+
+    .game-logo {
+        margin-top: 3px;
+    }
+
+
+    .setup-card {
+        flex: 0 0 auto;
+    }
+
+
+    .start-button {
+        flex: 0 0 auto;
+
+        margin-bottom: 35px;
+    }
+
+
+    .crop-area {
+        width: min(100%, 280px);
+    }
+
+}
+
+
+/* =========================================================
+   SMALL HEIGHT
+========================================================= */
+
+@media (
+    max-height: 700px
+) and (
+    orientation: portrait
+) {
+
+    #setupScreen {
+        padding-top: 14px;
+
+        padding-bottom: 80px;
+    }
+
+
+    .logo-goat {
+        font-size: 42px;
+    }
+
+
+    .game-logo h1 {
+        font-size: 31px;
+    }
+
+
+    .game-logo {
+        margin-bottom: 8px;
+    }
+
+
+    .level-box {
+        margin-bottom: 9px;
+    }
+
+
+    .setup-card {
+        padding: 13px;
+
+        margin-bottom: 10px;
+    }
+
+
+    .crop-area {
+        width: min(100%, 240px);
+    }
+
+
+    .start-button {
+        min-height: 56px;
+    }
+
+}
+
+
+/* =========================================================
+   LANDSCAPE PHONE
+========================================================= */
+
+@media (
+    orientation: landscape
+) and (
+    max-height: 600px
+) {
+
+    .game-hud {
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+
+
+    .fighter {
+        bottom: 14%;
+
+        transform: scale(.8);
+        transform-origin: bottom center;
+    }
+
+
+    .player {
+        left: 18%;
+    }
+
+
+    .enemy {
+        left: 72%;
+    }
+
+
+    .controls {
+        padding-top: 5px;
+    }
+
+
+    .control-button {
+        width: 50px;
+        height: 50px;
+    }
+
+
+    .attack-button {
+        width: 62px;
+        height: 62px;
+    }
+
+}
+
+
+/* =========================================================
+   DESKTOP
+========================================================= */
+
+@media (min-width: 800px) {
+
+    .controls {
+        justify-content: center;
+
+        gap: 180px;
+    }
+
+
+    .fighter {
+        transform: scale(1.15);
+
+        transform-origin: bottom center;
+    }
+
+
+    .player {
+        left: 25%;
+    }
+
+
+    .enemy {
+        left: 68%;
+    }
+
+}

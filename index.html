@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+    >
+
+    <meta name="theme-color" content="#090d13">
+
+    <title>GOAT FIGHT</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- =========================================================
+     SETUP SCREEN
+========================================================= -->
+
+<section id="setupScreen" class="screen active">
+
+    <div class="game-logo">
+        <div class="logo-goat">🐐</div>
+
+        <h1>GOAT FIGHT</h1>
+
+        <p>ĐẤM BỐC</p>
+    </div>
+
+
+    <div class="level-box">
+        <span>LEVEL</span>
+        <strong id="setupLevel">0</strong>
+    </div>
+
+
+    <!-- ===============================
+         OPPONENT
+    ================================ -->
+
+    <div class="setup-card">
+
+        <div class="card-title">
+            <span>🥊</span>
+            ĐỐI THỦ
+        </div>
+
+
+        <label class="upload-button">
+
+            <input
+                id="enemyImageInput"
+                type="file"
+                accept="image/*"
+                hidden
+            >
+
+            <span>📷</span>
+            CHỌN ẢNH ĐỐI THỦ
+
+        </label>
+
+
+        <!-- Crop -->
+
+        <div id="cropSection" class="crop-section">
+
+            <div class="crop-title">
+                Căn khuôn mặt
+            </div>
+
+
+            <div id="cropArea" class="crop-area">
+
+                <img
+                    id="cropImage"
+                    alt="Ảnh đối thủ"
+                >
+
+                <div class="crop-circle"></div>
+
+            </div>
+
+
+            <div class="zoom-row">
+
+                <span>−</span>
+
+                <input
+                    id="zoomSlider"
+                    type="range"
+                    min="1"
+                    max="3"
+                    step="0.01"
+                    value="1"
+                >
+
+                <span>+</span>
+
+            </div>
+
+
+            <button
+                id="confirmFaceButton"
+                class="secondary-button"
+                type="button"
+            >
+                ✓ XÁC NHẬN KHUÔN MẶT
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- ===============================
+         WEAPONS
+    ================================ -->
+
+    <div class="setup-card">
+
+        <div class="card-title">
+            <span>⚔️</span>
+            CHỌN VŨ KHÍ
+        </div>
+
+
+        <div id="weaponList" class="weapon-list">
+
+            <button
+                class="weapon-card selected"
+                data-weapon="fist"
+                type="button"
+            >
+                <div class="weapon-icon">🥊</div>
+                <strong>Găng Đấm</strong>
+                <small>Cơ bản</small>
+            </button>
+
+
+            <button
+                class="weapon-card"
+                data-weapon="stick"
+                type="button"
+            >
+                <div class="weapon-icon">🪵</div>
+                <strong>Gậy Gỗ</strong>
+                <small>Đẩy lùi</small>
+            </button>
+
+
+            <button
+                class="weapon-card"
+                data-weapon="sword"
+                type="button"
+            >
+                <div class="weapon-icon">⚔️</div>
+                <strong>Kiếm</strong>
+                <small>Tầm xa</small>
+            </button>
+
+
+            <button
+                class="weapon-card"
+                data-weapon="hammer"
+                type="button"
+            >
+                <div class="weapon-icon">🔨</div>
+                <strong>Búa</strong>
+                <small>Sát thương lớn</small>
+            </button>
+
+
+            <button
+                class="weapon-card"
+                data-weapon="fire"
+                type="button"
+            >
+                <div class="weapon-icon">🔥</div>
+                <strong>Găng Lửa</strong>
+                <small>Thiêu đốt</small>
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- ===============================
+         START
+    ================================ -->
+
+    <button
+        id="startGameButton"
+        class="start-button"
+        type="button"
+    >
+        <span>⚡</span>
+        BẮT ĐẦU TRẬN
+    </button>
+
+</section>
+
+
+<!-- =========================================================
+     GAME SCREEN
+========================================================= -->
+
+<section id="gameScreen" class="screen">
+
+    <!-- HUD -->
+
+    <div class="game-hud">
+
+        <div class="fighter-info player-info">
+
+            <div class="fighter-name">
+                🐐 GOAT
+            </div>
+
+            <div class="hp-container">
+
+                <div
+                    id="playerHpBar"
+                    class="hp-bar player-hp"
+                ></div>
+
+            </div>
+
+            <div id="playerHpText">
+                100 / 100
+            </div>
+
+        </div>
+
+
+        <div class="battle-level">
+
+            LEVEL
+
+            <strong id="battleLevel">
+                0
+            </strong>
+
+        </div>
+
+
+        <div class="fighter-info enemy-info">
+
+            <div class="fighter-name">
+                👤 ĐỐI THỦ
+            </div>
+
+            <div class="hp-container">
+
+                <div
+                    id="enemyHpBar"
+                    class="hp-bar enemy-hp"
+                ></div>
+
+            </div>
+
+            <div id="enemyHpText">
+                100 / 100
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- STATUS -->
+
+    <div
+        id="battleStatus"
+        class="battle-status"
+    >
+        FIGHT!
+    </div>
+
+
+    <!-- ARENA -->
+
+    <div id="arena" class="arena">
+
+        <div class="cloud cloud-1"></div>
+        <div class="cloud cloud-2"></div>
+        <div class="cloud cloud-3"></div>
+
+        <div class="mountains mountain-back"></div>
+        <div class="mountains mountain-front"></div>
+
+
+        <!-- PLAYER -->
+
+        <div id="player" class="fighter player">
+
+            <div class="goat-character">
+
+                <div class="goat-horns">
+
+                    <div class="horn left-horn"></div>
+                    <div class="horn right-horn"></div>
+
+                </div>
+
+
+                <div class="goat-head">
+
+                    <div class="goat-ear left-ear"></div>
+                    <div class="goat-ear right-ear"></div>
+
+                    <div class="goat-eye left-eye"></div>
+                    <div class="goat-eye right-eye"></div>
+
+                    <div class="goat-nose"></div>
+
+                    <div class="goat-beard"></div>
+
+                </div>
+
+
+                <div class="goat-neck"></div>
+
+
+                <div class="goat-body">
+
+                    <div class="goat-arm left-arm"></div>
+
+                    <div class="goat-arm right-arm"></div>
+
+                </div>
+
+
+                <div class="goat-legs">
+
+                    <div class="goat-leg left-leg"></div>
+                    <div class="goat-leg right-leg"></div>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="playerWeapon"
+                class="player-weapon"
+            ></div>
+
+        </div>
+
+
+        <!-- ENEMY -->
+
+        <div id="enemy" class="fighter enemy">
+
+            <div class="enemy-character">
+
+                <div class="enemy-head">
+
+                    <div
+                        id="enemyFacePlaceholder"
+                        class="enemy-face-placeholder"
+                    >
+                        ?
+                    </div>
+
+
+                    <div
+                        id="enemyFace"
+                        class="enemy-face"
+                    ></div>
+
+                </div>
+
+
+                <div class="enemy-neck"></div>
+
+
+                <div class="enemy-body">
+
+                    <div class="enemy-arm left-enemy-arm"></div>
+
+                    <div class="enemy-arm right-enemy-arm"></div>
+
+                </div>
+
+
+                <div class="enemy-legs">
+
+                    <div class="enemy-leg left-enemy-leg"></div>
+                    <div class="enemy-leg right-enemy-leg"></div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- EFFECTS -->
+
+        <div
+            id="hitEffect"
+            class="hit-effect"
+        >
+            ✦
+        </div>
+
+
+        <div
+            id="damageNumber"
+            class="damage-number"
+        >
+            -10
+        </div>
+
+
+        <div
+            id="weaponTrail"
+            class="weapon-trail"
+        ></div>
+
+    </div>
+
+
+    <!-- CONTROLS -->
+
+    <div class="controls">
+
+        <div class="movement-controls">
+
+            <button
+                id="leftButton"
+                class="control-button"
+                type="button"
+            >
+                ◀
+            </button>
+
+
+            <button
+                id="rightButton"
+                class="control-button"
+                type="button"
+            >
+                ▶
+            </button>
+
+        </div>
+
+
+        <div class="action-controls">
+
+            <button
+                id="jumpButton"
+                class="control-button jump-button"
+                type="button"
+            >
+                ▲
+            </button>
+
+
+            <button
+                id="attackButton"
+                class="control-button attack-button"
+                type="button"
+            >
+                👊
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     RESULT SCREEN
+========================================================= -->
+
+<section id="resultScreen" class="screen">
+
+    <div class="result-card">
+
+        <div
+            id="resultIcon"
+            class="result-icon"
+        >
+            🏆
+        </div>
+
+
+        <h2 id="resultTitle">
+            CHIẾN THẮNG!
+        </h2>
+
+
+        <p id="resultMessage">
+            Bạn đã đánh bại đối thủ!
+        </p>
+
+
+        <button
+            id="nextBattleButton"
+            class="start-button"
+            type="button"
+        >
+            ⚡ TRẬN TIẾP THEO
+        </button>
+
+
+        <button
+            id="backToMenuButton"
+            class="secondary-button"
+            type="button"
+        >
+            ← VỀ MENU
+        </button>
+
+    </div>
+
+</section>
+
+
+<script src="game.js"></script>
+
+</body>
+</html>
